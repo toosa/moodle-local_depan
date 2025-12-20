@@ -1,84 +1,146 @@
-# Landing Page Plugin (local_depan)
+# Moodle Landing Page Plugin (local_depan)
 
-Plugin ini membuat halaman depan/landing page yang menarik untuk Moodle Anda.
+A modern, responsive landing page plugin for Moodle that creates an attractive entry point for your learning platform.
 
-## Fitur
+![Moodle Version](https://img.shields.io/badge/Moodle-4.0%2B-blue)
+![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-green)
+![License](https://img.shields.io/badge/License-GPL%20v3-orange)
 
-- **Halaman Landing Modern**: Desain responsif dengan hero section yang menarik
-- **Multi-bahasa**: Dukungan bahasa Inggris dan Indonesia
-- **Konfigurasi Mudah**: Pengaturan dapat disesuaikan melalui admin panel
-- **Responsive Design**: Tampilan optimal di desktop, tablet, dan mobile
-- **Redirect Otomatis**: Pengunjung yang belum login akan diarahkan ke landing page
+## 🌟 Features
 
-## Fitur Landing Page
+- **Modern Landing Page**: Responsive design with attractive hero section
+- **Multi-language**: Support for English and Indonesian
+- **Easy Configuration**: Customizable settings through admin panel
+- **Responsive Design**: Optimal display on desktop, tablet, and mobile
+- **Auto Redirect**: Non-logged visitors are redirected to landing page
 
-1. **Hero Section**: Bagian utama dengan judul, subjudul, dan call-to-action
-2. **Features Section**: Menampilkan keunggulan platform
-3. **Statistics Section**: Statistik jumlah kursus dan pengguna (untuk user yang sudah login)
-4. **Courses Section**: Preview kursus yang tersedia
+## 📸 Screenshots
 
-## Instalasi
+*Screenshots will be added soon*
 
-1. Upload folder `depan` ke direktori `/local/` di instalasi Moodle Anda
-2. Kunjungi halaman admin notifications untuk menginstall plugin
-3. Atau jalankan: `php admin/cli/upgrade.php --non-interactive`
+## 🚀 Demo
 
-## Konfigurasi
+*Live demo coming soon*
 
-Setelah instalasi, Anda dapat mengkonfigurasi plugin melalui:
-**Site Administration > Plugins > Local plugins > Landing Page**
+## 🛠️ Installation
 
-### Pengaturan yang tersedia:
+### Method 1: Download from GitHub
 
-- **Enable Landing Page**: Aktifkan/non-aktifkan landing page
-- **Custom Welcome Title**: Judul utama pada hero section
-- **Custom Welcome Subtitle**: Subjudul pada hero section  
-- **Custom Hero Description**: Deskripsi pada hero section
+1. Download the latest release from [Releases page](https://github.com/toosa/moodle-local_depan/releases)
+2. Extract and upload the `depan` folder to `/local/` directory in your Moodle installation
+3. Visit Site Administration > Notifications to install the plugin
+4. Or run: `php admin/cli/upgrade.php --non-interactive`
 
-## Cara Kerja
+### Method 2: Git Clone
 
-1. Ketika pengunjung yang belum login mengakses halaman utama Moodle
-2. Plugin akan mengalihkan mereka ke `/local/depan/index.php`
-3. Landing page akan menampilkan interface yang menarik dengan tombol login/register
-4. User yang sudah login akan melihat halaman Moodle normal
+```bash
+cd /path/to/your/moodle/local/
+git clone https://github.com/toosa/moodle-local_depan.git depan
+cd depan
+php ../../admin/cli/upgrade.php --non-interactive
+```
 
-## Kustomisasi
+## 🎨 Landing Page Components
 
-### CSS
-Edit file `styles.css` untuk mengubah tampilan landing page.
+1. **Hero Section**: Main section with title, subtitle, and call-to-action buttons
+2. **Features Section**: Highlights of your platform's key features
+3. **Statistics Section**: Course and user statistics (for logged-in users)
+4. **Courses Section**: Preview of available courses
 
-### Bahasa
-Tambahkan file bahasa baru di folder `lang/` untuk dukungan bahasa tambahan.
+## ⚙️ Configuration
 
-### Konten
-Edit file `index.php` untuk mengubah struktur dan konten landing page.
+After installation, configure the plugin through:
 
-## File Structure
+**Site Administration → Plugins → Local plugins → Landing Page**
+
+### Available Settings:
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| **Enable Landing Page** | Enable/disable landing page redirect | ✅ Enabled |
+| **Custom Welcome Title** | Main title in hero section | "Welcome to Our Learning Platform" |
+| **Custom Welcome Subtitle** | Subtitle in hero section | "Discover, Learn, and Grow with Us" |
+| **Custom Hero Description** | Description text in hero section | Default description text |
+
+## 🔄 How It Works
+
+1. 🚪 **Non-logged visitors** access your Moodle site's homepage
+2. 🔀 **Plugin redirects** them to `/local/depan/index.php`
+3. 🎨 **Landing page displays** with attractive interface and login/register buttons
+4. ✅ **Logged-in users** see the normal Moodle interface
+
+## 🎨 Customization
+
+### 🎨 Styling
+Edit [`styles.css`](styles.css) to customize colors, fonts, and layout.
+
+### 🌐 Languages
+Add new language files in the `lang/` folder. Currently supports:
+- 🇺🇸 English (`lang/en/`)
+- 🇮🇩 Indonesian (`lang/id/`)
+
+### 📝 Content
+Modify [`index.php`](index.php) to change structure and content of the landing page.
+
+## 📁 File Structure
 
 ```
 local/depan/
-├── version.php          # Plugin version info
-├── lib.php             # Main plugin functions
-├── settings.php        # Admin settings
-├── index.php           # Landing page
-├── styles.css          # CSS styling
-├── lang/
-│   ├── en/
-│   │   └── local_depan.php    # English strings
-│   └── id/
-│       └── local_depan.php    # Indonesian strings
-└── README.md           # Documentation
+├── 📄 version.php              # Plugin version and metadata
+├── 🔧 lib.php                 # Core plugin functions and hooks
+├── ⚙️ settings.php            # Admin configuration panel
+├── 🎨 index.php               # Main landing page
+├── 💄 styles.css              # Custom CSS styling
+├── 🌐 lang/
+│   ├── 🇺🇸 en/
+│   │   └── local_depan.php     # English language strings
+│   └── 🇮🇩 id/
+│       └── local_depan.php     # Indonesian language strings
+├── 🚫 .gitignore              # Git ignore rules
+└── 📖 README.md               # This documentation
 ```
 
-## Requirements
+## 📋 Requirements
 
-- Moodle 4.0+ (ditest pada Moodle 4.5)
-- PHP 7.4+
+- 🎓 **Moodle**: 4.0+ (tested on Moodle 4.5)
+- 🐘 **PHP**: 7.4+
+- 🌐 **Web Server**: Apache/Nginx
 
-## Support
+## 🤝 Contributing
 
-Untuk bantuan dan pertanyaan, silakan hubungi developer atau buat issue di repository.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-GNU GPL v3 or later
+## 🐛 Bug Reports & Feature Requests
+
+Please use the [GitHub Issues](https://github.com/toosa/moodle-local_depan/issues) page to report bugs or request features.
+
+## 📞 Support
+
+For help and questions:
+- 📧 Create an [Issue](https://github.com/toosa/moodle-local_depan/issues)
+- 💬 [Discussions](https://github.com/toosa/moodle-local_depan/discussions)
+- 📖 Check the [Wiki](https://github.com/toosa/moodle-local_depan/wiki)
+
+## ⭐ Show Your Support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+This project is licensed under the [GNU GPL v3](LICENSE) - see the LICENSE file for details.
+
+## 👨‍💻 Author
+
+**Toosa**
+- GitHub: [@toosa](https://github.com/toosa)
+- Website: [toosa.dev](https://toosa.dev)
+
+---
+
+<p align="center">Made with ❤️ for the Moodle community</p>
