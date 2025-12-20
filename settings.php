@@ -18,7 +18,7 @@
  * Settings for local_depan
  *
  * @package    local_depan
- * @copyright  2025 YOUR NAME <your@email.com>
+ * @copyright  2025 Prihantoosa <pht854@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
