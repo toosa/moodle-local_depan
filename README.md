@@ -139,7 +139,7 @@ This project is licensed under the [GNU GPL v3](LICENSE) - see the LICENSE file 
 
 **Toosa**
 - GitHub: [@toosa](https://github.com/toosa)
-- Website: [toosa.dev](https://toosa.dev)
+
 
 ---
 
