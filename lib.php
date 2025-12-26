@@ -23,21 +23,3 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-
-/**
- * Hook to redirect frontpage to our landing page
- */
-function local_depan_before_standard_html_head() {
-    global $PAGE, $CFG;
-    
-    // Check if landing page is enabled
-    $enabled = get_config('local_depan', 'enabled');
-    if (empty($enabled)) {
-        return;
-    }
-    
-    // Only redirect if we're on the site frontpage and not logged in
-    if ($PAGE->pagetype === 'site-index' && !isloggedin()) {
-        redirect($CFG->wwwroot . '/local/depan/index.php');
-    }
-}
