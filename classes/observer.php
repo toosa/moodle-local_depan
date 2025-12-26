@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library functions for local_depan
+ * Event observers for local_depan
  *
  * @package    local_depan
  * @copyright  2025 Prihantoosa <pht854@gmail.com>
@@ -25,39 +25,29 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Extend navigation to add landing page redirect
- *
- * @param global_navigation $navigation
+ * Event observer for landing page redirect
  */
-function local_depan_extend_navigation(global_navigation $navigation) {
-    global $PAGE, $CFG;
+class local_depan_observer {
     
-    // Check if landing page is enabled
-    $enabled = get_config('local_depan', 'enabled');
-    if (empty($enabled)) {
-        return;
-    }
-    
-    // Only redirect if we're on the site frontpage and not logged in
-    if ($PAGE->pagetype === 'site-index' && (!isloggedin() || isguestuser())) {
-        redirect($CFG->wwwroot . '/local/depan/index.php');
-    }
-}
-
-/**
- * Hook called before HTTP headers are sent
- */
-function local_depan_before_http_headers() {
-    global $PAGE, $CFG, $ME;
-    
-    // Check if landing page is enabled
-    $enabled = get_config('local_depan', 'enabled');
-    if (empty($enabled)) {
-        return;
-    }
-    
-    // Check if we're on the main index page
-    if (strpos($ME, '/index.php') !== false && $PAGE->context->contextlevel == CONTEXT_SYSTEM) {
+    /**
+     * Handle course viewed event to redirect to landing page
+     *
+     * @param \core\event\course_viewed $event
+     */
+    public static function course_viewed(\core\event\course_viewed $event) {
+        global $CFG, $PAGE;
+        
+        // Check if this is the site course (front page)
+        if ($event->courseid != SITEID) {
+            return;
+        }
+        
+        // Check if landing page is enabled
+        $enabled = get_config('local_depan', 'enabled');
+        if (empty($enabled)) {
+            return;
+        }
+        
         // Only redirect if user is not logged in (guest)
         if (!isloggedin() || isguestuser()) {
             redirect($CFG->wwwroot . '/local/depan/index.php');
