@@ -62,4 +62,35 @@ if ($hassiteconfig) {
         get_string('hero_description', 'local_depan'),
         PARAM_TEXT
     ));
+
+    // Hero background type
+    $settings->add(new admin_setting_configselect(
+        'local_depan/hero_bg_type',
+        get_string('hero_bg_type', 'local_depan'),
+        get_string('hero_bg_type_desc', 'local_depan'),
+        'gradient',
+        [
+            'gradient' => get_string('hero_bg_gradient', 'local_depan'),
+            'color' => get_string('hero_bg_color', 'local_depan'),
+            'image' => get_string('hero_bg_image', 'local_depan')
+        ]
+    ));
+
+    // Hero background color
+    $settings->add(new admin_setting_configcolourpicker(
+        'local_depan/hero_bg_color',
+        get_string('hero_bg_color_picker', 'local_depan'),
+        get_string('hero_bg_color_picker_desc', 'local_depan'),
+        '#667eea'
+    ));
+
+    // Hero background image
+    $settings->add(new admin_setting_configstoredfile(
+        'local_depan/hero_bg_image',
+        get_string('hero_bg_image_file', 'local_depan'),
+        get_string('hero_bg_image_file_desc', 'local_depan'),
+        'hero_bg_image',
+        0,
+        ['maxfiles' => 1, 'accepted_types' => ['image']]
+    ));
 }

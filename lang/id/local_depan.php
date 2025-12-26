@@ -55,3 +55,14 @@ $string['custom_welcome_subtitle'] = 'Subjudul Selamat Datang Kustom';
 $string['custom_welcome_subtitle_desc'] = 'Subjudul kustom untuk bagian hero';
 $string['custom_hero_description'] = 'Deskripsi Hero Kustom';
 $string['custom_hero_description_desc'] = 'Teks deskripsi kustom di bagian hero';
+
+// Hero background settings
+$string['hero_bg_type'] = 'Jenis Latar Belakang Hero';
+$string['hero_bg_type_desc'] = 'Pilih jenis latar belakang untuk bagian hero';
+$string['hero_bg_gradient'] = 'Latar Belakang Gradien';
+$string['hero_bg_color'] = 'Latar Belakang Warna Solid';
+$string['hero_bg_image'] = 'Latar Belakang Gambar';
+$string['hero_bg_color_picker'] = 'Warna Latar Belakang';
+$string['hero_bg_color_picker_desc'] = 'Pilih warna solid untuk latar belakang hero';
+$string['hero_bg_image_file'] = 'Gambar Latar Belakang';
+$string['hero_bg_image_file_desc'] = 'Upload gambar untuk latar belakang hero';

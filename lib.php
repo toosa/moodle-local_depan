@@ -25,6 +25,51 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
+ * File serving callback
+ *
+ * @param stdClass $course course object
+ * @param stdClass $cm course module object
+ * @param stdClass $context context object
+ * @param string $filearea file area
+ * @param array $args extra arguments
+ * @param bool $forcedownload whether or not force download
+ * @param array $options additional options affecting the file serving
+ * @return bool false if the file not found, just send the file otherwise and do not return anything
+ */
+function local_depan_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+    if ($context->contextlevel != CONTEXT_SYSTEM) {
+        return false;
+    }
+
+    if ($filearea !== 'hero_bg_image') {
+        return false;
+    }
+
+    $fs = get_file_storage();
+    $filename = array_pop($args);
+    $itemid = array_pop($args);
+    $filepath = '/';
+
+    $file = $fs->get_file($context->id, 'local_depan', $filearea, $itemid, $filepath, $filename);
+    if (!$file) {
+        return false;
+    }
+
+    send_stored_file($file, null, 0, $forcedownload, $options);
+}
+
+/**
+ * Get file areas for this plugin
+ *
+ * @return array
+ */
+function local_depan_get_file_areas() {
+    return array(
+        'hero_bg_image' => get_string('hero_bg_image_file', 'local_depan')
+    );
+}
+
+/**
  * Extend navigation to add landing page redirect
  *
  * @param global_navigation $navigation
@@ -48,6 +93,10 @@ function local_depan_extend_navigation(global_navigation $navigation) {
  * Hook called before HTTP headers are sent
  */
 function local_depan_before_http_headers() {
+    // This is an implementation of a legacy callback that will only be called in older Moodle versions.
+    // It will not be called in Moodle versions that contain the hook core\hook\output\before_http_headers,
+    // instead, the callback local_depan\local\hooks\output\before_http_headers::callback will be executed.
+
     global $PAGE, $CFG, $ME;
     
     // Check if landing page is enabled

@@ -1,0 +1,61 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_depan/landing
+
+    Landing page template for the site.
+
+    Context variables required for this template:
+    * welcome_title - The main title
+    * welcome_subtitle - The subtitle
+    * hero_description - Hero section description
+    * hero_background - Hero background configuration
+    * is_logged_in - Whether user is logged in
+    * features - Array of features
+    * courses - Array of courses
+    * stats - Array of statistics (if logged in)
+
+    Example context (json):
+    {
+        "welcome_title": "Welcome to Our Platform",
+        "welcome_subtitle": "Learn. Grow. Succeed.",
+        "hero_description": "Transform your skills with our comprehensive learning platform",
+        "hero_background": {
+            "type": "gradient",
+            "style": "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+        },
+        "is_logged_in": false,
+        "features": [
+            {
+                "icon": "fa-play-circle",
+                "title": "Interactive Learning",
+                "description": "Engage with interactive content"
+            }
+        ]
+    }
+}}
+
+<div class="landing-page">
+    {{> local_depan/hero }}
+    {{> local_depan/features }}
+    {{#show_stats}}
+        {{> local_depan/statistics }}
+    {{/show_stats}}
+    {{#has_courses}}
+        {{> local_depan/courses }}
+    {{/has_courses}}
+</div>

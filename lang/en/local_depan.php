@@ -55,3 +55,14 @@ $string['custom_welcome_subtitle'] = 'Custom Welcome Subtitle';
 $string['custom_welcome_subtitle_desc'] = 'Custom subtitle for the hero section';
 $string['custom_hero_description'] = 'Custom Hero Description';
 $string['custom_hero_description_desc'] = 'Custom description text in the hero section';
+
+// Hero background settings
+$string['hero_bg_type'] = 'Hero Background Type';
+$string['hero_bg_type_desc'] = 'Choose the type of background for the hero section';
+$string['hero_bg_gradient'] = 'Gradient Background';
+$string['hero_bg_color'] = 'Solid Color Background';
+$string['hero_bg_image'] = 'Image Background';
+$string['hero_bg_color_picker'] = 'Background Color';
+$string['hero_bg_color_picker_desc'] = 'Choose a solid color for the hero background';
+$string['hero_bg_image_file'] = 'Background Image';
+$string['hero_bg_image_file_desc'] = 'Upload an image for the hero background';

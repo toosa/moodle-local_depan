@@ -1,0 +1,26 @@
+{{!
+    @template local_depan/features
+    
+    Features section for landing page
+
+    Context variables:
+    * features_title - Section title
+    * features - Array of feature objects with icon, title, description
+}}
+
+<div class="features-section">
+    <div class="container">
+        <h2 class="section-title">{{features_title}}</h2>
+        <div class="features-grid">
+            {{#features}}
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa {{icon}}"></i>
+                </div>
+                <h3>{{title}}</h3>
+                <p>{{description}}</p>
+            </div>
+            {{/features}}
+        </div>
+    </div>
+</div>

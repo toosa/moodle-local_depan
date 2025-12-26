@@ -1,0 +1,21 @@
+{{!
+    @template local_depan/statistics
+    
+    Statistics section for landing page
+
+    Context variables:
+    * stats - Array of statistic objects with number and label
+}}
+
+<div class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            {{#stats}}
+            <div class="stat-card">
+                <div class="stat-number">{{number}}</div>
+                <div class="stat-label">{{label}}</div>
+            </div>
+            {{/stats}}
+        </div>
+    </div>
+</div>

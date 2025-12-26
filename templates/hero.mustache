@@ -1,0 +1,44 @@
+{{!
+    @template local_depan/hero
+    
+    Hero section for landing page
+
+    Context variables:
+    * welcome_title - Main title
+    * welcome_subtitle - Subtitle  
+    * hero_description - Description text
+    * hero_background - Background configuration object
+    * is_logged_in - User login status
+    * login_url, signup_url, dashboard_url, course_url - Navigation URLs
+    * str_login, str_register, str_get_started, str_explore_courses - Button labels
+}}
+
+<div class="hero-section" style="{{{hero_background.style}}}">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">{{{welcome_title}}}</h1>
+            <h2 class="hero-subtitle">{{{welcome_subtitle}}}</h2>
+            <p class="hero-description">{{{hero_description}}}</p>
+            
+            <div class="hero-buttons">
+                {{^is_logged_in}}
+                    <a href="{{login_url}}" class="btn btn-primary btn-lg">
+                        {{str_login}}
+                    </a>
+                    <a href="{{signup_url}}" class="btn btn-secondary btn-lg">
+                        {{str_register}}
+                    </a>
+                {{/is_logged_in}}
+                {{#is_logged_in}}
+                    <a href="{{dashboard_url}}" class="btn btn-primary btn-lg">
+                        {{str_get_started}}
+                    </a>
+                    <a href="{{course_url}}" class="btn btn-secondary btn-lg">
+                        {{str_explore_courses}}
+                    </a>
+                {{/is_logged_in}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,15 +6,19 @@
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 100px 0;
     text-align: center;
     position: relative;
     overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    /* Default gradient background - will be overridden by inline styles from settings */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.hero-section::before {
+.hero-overlay {
     content: '';
     position: absolute;
     top: 0;
