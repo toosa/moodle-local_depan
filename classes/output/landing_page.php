@@ -52,22 +52,44 @@ class landing_page implements renderable, templatable {
      * Load courses data
      */
     private function load_courses() {
-        $courses = get_courses('all', 'c.sortorder ASC', 'c.id,c.shortname,c.fullname,c.summary');
+        global $DB;
+
+        $limit = (int) (get_config('local_depan', 'maxactivecourses') ?? 6);
+        if ($limit < 1) {
+            $limit = 6;
+        }
+
+                $sql = "SELECT c.id, c.fullname, c.summary, c.summaryformat
+                                    FROM {course} c
+                                 WHERE c.id <> :siteid
+                                     AND c.visible = 1
+                            ORDER BY c.sortorder ASC";
+                $params = [
+                        'siteid' => SITEID,
+                ];
+
+        $courses = $DB->get_records_sql($sql, $params, 0, $limit);
         $this->courses = [];
-        $count = 0;
 
         foreach ($courses as $course) {
-            if ($course->id == 1 || $count >= 6) continue; // Skip site course and limit to 6
-            
-            $course_view_url = new \moodle_url('/course/view.php', array('id' => $course->id));
+            $courseviewurl = new \moodle_url('/course/view.php', ['id' => $course->id]);
+            $context = \context_course::instance($course->id);
+
+            $courseimageurl = null;
+            try {
+                $courseimageurl = \cache::make('core', 'course_image')->get($course->id);
+            } catch (\Throwable $e) {
+                $courseimageurl = null;
+            }
+
             $this->courses[] = [
                 'id' => $course->id,
                 'fullname' => format_string($course->fullname),
-                'summary' => format_text($course->summary, FORMAT_PLAIN),
-                'url' => $course_view_url->out(false),
-                'learn_more' => get_string('learn_more', 'local_depan')
+                'summary' => format_text($course->summary, $course->summaryformat, ['context' => $context]),
+                'url' => $courseviewurl->out(false),
+                'courseimageurl' => $courseimageurl ?: null,
+                'learn_more' => get_string('learn_more', 'local_depan'),
             ];
-            $count++;
         }
     }
 
@@ -190,6 +212,7 @@ class landing_page implements renderable, templatable {
         $data->str_register = get_string('register', 'local_depan');
         $data->str_get_started = get_string('get_started', 'local_depan');
         $data->str_explore_courses = get_string('explore_courses', 'local_depan');
+        $data->str_view_all_courses = get_string('view_all_courses', 'local_depan');
         
         // Features
         $data->features_title = get_string('features_title', 'local_depan');
@@ -224,9 +247,8 @@ class landing_page implements renderable, templatable {
         
         // Courses
         $data->has_courses = !empty($this->courses);
-        if ($data->has_courses) {
-            $data->courses = $this->courses;
-        }
+        $data->courses = $this->courses;
+        $data->no_active_courses_message = get_string('noactivecourses', 'local_depan');
         
         return $data;
     }

@@ -93,4 +93,13 @@ if ($hassiteconfig) {
         0,
         ['maxfiles' => 1, 'accepted_types' => ['image']]
     ));
+
+    // Max active courses shown under hero.
+    $settings->add(new admin_setting_configtext(
+        'local_depan/maxactivecourses',
+        get_string('maxactivecourses', 'local_depan'),
+        get_string('maxactivecourses_desc', 'local_depan'),
+        6,
+        PARAM_INT
+    ));
 }

@@ -75,41 +75,36 @@ function local_depan_get_file_areas() {
  * @param global_navigation $navigation
  */
 function local_depan_extend_navigation(global_navigation $navigation) {
-    global $PAGE, $CFG;
-    
-    // Check if landing page is enabled
-    $enabled = get_config('local_depan', 'enabled');
-    if (empty($enabled)) {
-        return;
-    }
-    
-    // Only redirect if we're on the site frontpage and not logged in
-    if ($PAGE->pagetype === 'site-index' && (!isloggedin() || isguestuser())) {
-        redirect($CFG->wwwroot . '/local/depan/index.php');
-    }
+    // Disabled - using before_http_headers instead to prevent conflicts
+    return;
 }
 
 /**
  * Hook called before HTTP headers are sent
  */
 function local_depan_before_http_headers() {
-    // This is an implementation of a legacy callback that will only be called in older Moodle versions.
-    // It will not be called in Moodle versions that contain the hook core\hook\output\before_http_headers,
-    // instead, the callback local_depan\local\hooks\output\before_http_headers::callback will be executed.
-
     global $PAGE, $CFG, $ME;
-    
+
     // Check if landing page is enabled
     $enabled = get_config('local_depan', 'enabled');
     if (empty($enabled)) {
         return;
     }
     
-    // Check if we're on the main index page
-    if (strpos($ME, '/index.php') !== false && $PAGE->context->contextlevel == CONTEXT_SYSTEM) {
-        // Only redirect if user is not logged in (guest)
-        if (!isloggedin() || isguestuser()) {
-            redirect($CFG->wwwroot . '/local/depan/index.php');
-        }
+    // Prevent redirect loop - don't redirect if already on landing page or special pages
+    if (strpos($ME, '/local/depan/') !== false || 
+        strpos($ME, '/admin/') !== false ||
+        strpos($ME, '/login/') !== false ||
+        strpos($ME, '/lib/') !== false ||
+        strpos($ME, '/theme/') !== false ||
+        defined('AJAX_SCRIPT') || 
+        defined('CLI_SCRIPT') ||
+        defined('WS_SERVER')) {
+        return;
+    }
+    
+    // Only redirect if we're on the site frontpage and not logged in
+    if ($PAGE->pagetype === 'site-index' && (!isloggedin() || isguestuser())) {
+        redirect($CFG->wwwroot . '/local/depan/index.php', null, 0);
     }
 }

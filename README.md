@@ -2,7 +2,7 @@
 
 A modern, responsive landing page plugin for Moodle that creates an attractive entry point for your learning platform.
 
-![Moodle Version](https://img.shields.io/badge/Moodle-4.0%2B-blue)
+![Moodle Version](https://img.shields.io/badge/Moodle-4.1%2B-blue)
 ![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-green)
 ![License](https://img.shields.io/badge/License-GPL%20v3-orange)
 
@@ -102,7 +102,7 @@ local/depan/
 
 ## 📋 Requirements
 
-- 🎓 **Moodle**: 4.0+ (tested on Moodle 4.5)
+- 🎓 **Moodle**: 4.1+ (tested on Moodle 4.5)
 - 🐘 **PHP**: 7.4+
 - 🌐 **Web Server**: Apache/Nginx
 

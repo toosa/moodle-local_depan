@@ -1,25 +1,44 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
-
-    Moodle is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Moodle is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-}}
-{{!
     @template local_depan/courses
+    
+    Courses section for landing page
 
-    TODO describe template courses
-
-    Example context (json):
-    {
-    }
+    Context variables:
+    * str_explore_courses - Section title
+    * courses - Array of course objects
+    * course_url - URL to all courses page
 }}
+
+<div class="courses-section">
+    <div class="container">
+        <h2 class="section-title">{{str_explore_courses}}</h2>
+        <div class="courses-grid">
+            {{#courses}}
+            <div class="course-card">
+                {{#courseimageurl}}
+                    <div class="course-image">
+                        <a href="{{url}}">
+                            <img src="{{courseimageurl}}" alt="{{fullname}}" loading="lazy" />
+                        </a>
+                    </div>
+                {{/courseimageurl}}
+                <h4><a href="{{url}}">{{fullname}}</a></h4>
+                <div class="course-summary">{{{summary}}}</div>
+                <a href="{{url}}" class="btn btn-outline-primary">
+                    {{learn_more}}
+                </a>
+            </div>
+            {{/courses}}
+        </div>
+        {{^courses}}
+            <div class="text-center mt-4">
+                <p>{{no_active_courses_message}}</p>
+            </div>
+        {{/courses}}
+        <div class="text-center mt-4">
+            <a href="{{course_url}}" class="btn btn-primary">
+                {{str_view_all_courses}}
+            </a>
+        </div>
+    </div>
+</div>

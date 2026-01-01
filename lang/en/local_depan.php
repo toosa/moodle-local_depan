@@ -56,6 +56,13 @@ $string['custom_welcome_subtitle_desc'] = 'Custom subtitle for the hero section'
 $string['custom_hero_description'] = 'Custom Hero Description';
 $string['custom_hero_description_desc'] = 'Custom description text in the hero section';
 
+$string['maxactivecourses'] = 'Maximum active courses';
+$string['maxactivecourses_desc'] = 'Maximum number of active (visible and within start/end date) courses shown under the hero section.';
+
+$string['noactivecourses'] = 'There are currently no active courses.';
+
+$string['view_all_courses'] = 'View all courses';
+
 // Hero background settings
 $string['hero_bg_type'] = 'Hero Background Type';
 $string['hero_bg_type_desc'] = 'Choose the type of background for the hero section';

@@ -56,6 +56,13 @@ $string['custom_welcome_subtitle_desc'] = 'Subjudul kustom untuk bagian hero';
 $string['custom_hero_description'] = 'Deskripsi Hero Kustom';
 $string['custom_hero_description_desc'] = 'Teks deskripsi kustom di bagian hero';
 
+$string['maxactivecourses'] = 'Maksimum course aktif';
+$string['maxactivecourses_desc'] = 'Jumlah maksimum course aktif (visible dan dalam rentang tanggal mulai/akhir) yang ditampilkan di bawah hero.';
+
+$string['noactivecourses'] = 'Sedang tidak ada Course yang aktif saat ini';
+
+$string['view_all_courses'] = 'Lihat semua course';
+
 // Hero background settings
 $string['hero_bg_type'] = 'Jenis Latar Belakang Hero';
 $string['hero_bg_type_desc'] = 'Pilih jenis latar belakang untuk bagian hero';
