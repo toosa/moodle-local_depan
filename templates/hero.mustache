@@ -9,6 +9,7 @@
     * hero_description - Description text
     * hero_background - Background configuration object
     * is_logged_in - User login status
+    * signup_enabled - Whether self registration is enabled
     * login_url, signup_url, dashboard_url, course_url - Navigation URLs
     * str_login, str_register, str_get_started, str_explore_courses - Button labels
 }}
@@ -26,9 +27,11 @@
                     <a href="{{login_url}}" class="btn btn-primary btn-lg">
                         {{str_login}}
                     </a>
-                    <a href="{{signup_url}}" class="btn btn-secondary btn-lg">
-                        {{str_register}}
-                    </a>
+                    {{#signup_enabled}}
+                        <a href="{{signup_url}}" class="btn btn-secondary btn-lg">
+                            {{str_register}}
+                        </a>
+                    {{/signup_enabled}}
                 {{/is_logged_in}}
                 {{#is_logged_in}}
                     <a href="{{dashboard_url}}" class="btn btn-primary btn-lg">

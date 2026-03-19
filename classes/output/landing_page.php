@@ -18,6 +18,8 @@ namespace local_depan\output;
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->libdir . '/authlib.php');
+
 use renderable;
 use renderer_base;
 use templatable;
@@ -191,6 +193,9 @@ class landing_page implements renderable, templatable {
         
         // User status
         $data->is_logged_in = $this->is_logged_in;
+        
+        // Check if self registration is enabled
+        $data->signup_enabled = !empty($CFG->registerauth) && \signup_is_enabled();
         
         // Custom settings
         $data->welcome_title = get_config('local_depan', 'welcome_title') ?: get_string('welcome_title', 'local_depan');
