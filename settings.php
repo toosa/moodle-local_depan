@@ -102,4 +102,164 @@ if ($hassiteconfig) {
         6,
         PARAM_INT
     ));
+
+    // Reusable option arrays for typography selects.
+    $fontoptions = [
+        ''                                        => get_string('font_inherit', 'local_depan'),
+        'Arial, sans-serif'                       => 'Arial',
+        'Georgia, serif'                          => 'Georgia',
+        '"Times New Roman", serif'                => 'Times New Roman',
+        '"Courier New", monospace'                => 'Courier New',
+        'Verdana, sans-serif'                     => 'Verdana',
+        '"Trebuchet MS", sans-serif'              => 'Trebuchet MS',
+        'Tahoma, sans-serif'                      => 'Tahoma',
+        '"Helvetica Neue", Helvetica, sans-serif' => 'Helvetica Neue',
+    ];
+    $weightoptions = [
+        ''    => get_string('font_inherit', 'local_depan'),
+        '100' => get_string('font_weight_100', 'local_depan'),
+        '300' => get_string('font_weight_300', 'local_depan'),
+        '400' => get_string('font_weight_400', 'local_depan'),
+        '500' => get_string('font_weight_500', 'local_depan'),
+        '600' => get_string('font_weight_600', 'local_depan'),
+        '700' => get_string('font_weight_700', 'local_depan'),
+        '800' => get_string('font_weight_800', 'local_depan'),
+        '900' => get_string('font_weight_900', 'local_depan'),
+    ];
+    $alignoptions = [
+        ''        => get_string('font_inherit', 'local_depan'),
+        'left'    => get_string('text_align_left', 'local_depan'),
+        'center'  => get_string('text_align_center', 'local_depan'),
+        'right'   => get_string('text_align_right', 'local_depan'),
+        'justify' => get_string('text_align_justify', 'local_depan'),
+    ];
+
+    // ── Title typography ──────────────────────────────────────────────────────
+    $settings->add(new admin_setting_heading(
+        'local_depan/title_styling_hdr',
+        get_string('title_styling', 'local_depan'),
+        ''
+    ));
+    $settings->add(new admin_setting_configtext(
+        'local_depan/title_font_size',
+        get_string('font_size', 'local_depan'),
+        get_string('font_size_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/title_font_family',
+        get_string('font_family', 'local_depan'),
+        get_string('font_family_desc', 'local_depan'),
+        '', $fontoptions
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/title_font_weight',
+        get_string('font_weight', 'local_depan'),
+        get_string('font_weight_desc', 'local_depan'),
+        '', $weightoptions
+    ));
+    $settings->add(new admin_setting_configcolourpicker(
+        'local_depan/title_font_color',
+        get_string('font_color', 'local_depan'),
+        get_string('font_color_desc', 'local_depan'),
+        ''
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/title_text_align',
+        get_string('text_align', 'local_depan'),
+        get_string('text_align_desc', 'local_depan'),
+        '', $alignoptions
+    ));
+    $settings->add(new admin_setting_configtext(
+        'local_depan/title_line_height',
+        get_string('line_height', 'local_depan'),
+        get_string('line_height_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
+
+    // ── Subtitle typography ───────────────────────────────────────────────────
+    $settings->add(new admin_setting_heading(
+        'local_depan/subtitle_styling_hdr',
+        get_string('subtitle_styling', 'local_depan'),
+        ''
+    ));
+    $settings->add(new admin_setting_configtext(
+        'local_depan/subtitle_font_size',
+        get_string('font_size', 'local_depan'),
+        get_string('font_size_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/subtitle_font_family',
+        get_string('font_family', 'local_depan'),
+        get_string('font_family_desc', 'local_depan'),
+        '', $fontoptions
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/subtitle_font_weight',
+        get_string('font_weight', 'local_depan'),
+        get_string('font_weight_desc', 'local_depan'),
+        '', $weightoptions
+    ));
+    $settings->add(new admin_setting_configcolourpicker(
+        'local_depan/subtitle_font_color',
+        get_string('font_color', 'local_depan'),
+        get_string('font_color_desc', 'local_depan'),
+        ''
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/subtitle_text_align',
+        get_string('text_align', 'local_depan'),
+        get_string('text_align_desc', 'local_depan'),
+        '', $alignoptions
+    ));
+    $settings->add(new admin_setting_configtext(
+        'local_depan/subtitle_line_height',
+        get_string('line_height', 'local_depan'),
+        get_string('line_height_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
+
+    // ── Description typography ────────────────────────────────────────────────
+    $settings->add(new admin_setting_heading(
+        'local_depan/description_styling_hdr',
+        get_string('description_styling', 'local_depan'),
+        ''
+    ));
+    $settings->add(new admin_setting_configtext(
+        'local_depan/description_font_size',
+        get_string('font_size', 'local_depan'),
+        get_string('font_size_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/description_font_family',
+        get_string('font_family', 'local_depan'),
+        get_string('font_family_desc', 'local_depan'),
+        '', $fontoptions
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/description_font_weight',
+        get_string('font_weight', 'local_depan'),
+        get_string('font_weight_desc', 'local_depan'),
+        '', $weightoptions
+    ));
+    $settings->add(new admin_setting_configcolourpicker(
+        'local_depan/description_font_color',
+        get_string('font_color', 'local_depan'),
+        get_string('font_color_desc', 'local_depan'),
+        ''
+    ));
+    $settings->add(new admin_setting_configselect(
+        'local_depan/description_text_align',
+        get_string('text_align', 'local_depan'),
+        get_string('text_align_desc', 'local_depan'),
+        '', $alignoptions
+    ));
+    $settings->add(new admin_setting_configtext(
+        'local_depan/description_line_height',
+        get_string('line_height', 'local_depan'),
+        get_string('line_height_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
 }

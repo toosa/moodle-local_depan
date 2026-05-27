@@ -123,6 +123,31 @@ class landing_page implements renderable, templatable {
     }
 
     /**
+     * Build inline CSS string for a text element from its stored typography settings.
+     *
+     * @param string $prefix  Config key prefix: 'title', 'subtitle', or 'description'
+     * @return string         Inline CSS string, e.g. "font-size:2rem;font-weight:700"
+     */
+    private function get_text_style(string $prefix): string {
+        $map = [
+            'font_size'   => 'font-size',
+            'font_family' => 'font-family',
+            'font_weight' => 'font-weight',
+            'font_color'  => 'color',
+            'text_align'  => 'text-align',
+            'line_height' => 'line-height',
+        ];
+        $parts = [];
+        foreach ($map as $key => $cssprop) {
+            $val = trim((string)(get_config('local_depan', $prefix . '_' . $key) ?? ''));
+            if ($val !== '' && $val !== 'inherit') {
+                $parts[] = $cssprop . ':' . $val;
+            }
+        }
+        return implode(';', $parts);
+    }
+
+    /**
      * Get hero background style based on settings
      */
     private function get_hero_background() {
@@ -204,6 +229,11 @@ class landing_page implements renderable, templatable {
         
         // Hero background
         $data->hero_background = $this->get_hero_background();
+
+        // Typography inline styles (empty string = no override, theme CSS applies)
+        $data->title_style       = $this->get_text_style('title');
+        $data->subtitle_style    = $this->get_text_style('subtitle');
+        $data->description_style = $this->get_text_style('description');
         
         // URLs
         $data->wwwroot = $CFG->wwwroot;
