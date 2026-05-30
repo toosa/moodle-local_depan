@@ -183,7 +183,7 @@ class landing_page implements renderable, templatable {
                     
                     $background = [
                         'type' => 'image',
-                        'style' => 'background-image: url(' . $imageurl . '); background-size: cover; background-position: center;'
+                        'style' => 'background-image: url(' . $imageurl . '); background-size: cover; background-position: top center;'
                     ];
                 } else {
                     // Fallback to gradient if no image uploaded
