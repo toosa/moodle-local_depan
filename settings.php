@@ -263,12 +263,12 @@ if ($hassiteconfig) {
         '', PARAM_TEXT
     ));
 
-    // ── Features Settings ─────────────────────────────────────────────────────
-    $settings->add(new admin_setting_heading(
-        'local_depan/features_settings_hdr',
-        get_string('features_settings', 'local_depan'),
-        get_string('features_settings_desc', 'local_depan')
-    ));
+    // ── Features Settings (separate sub-page) ─────────────────────────────────
+    $features_settings = new admin_settingpage(
+        'local_depan_features',
+        get_string('features_settings', 'local_depan')
+    );
+    $ADMIN->add('localplugins', $features_settings);
 
     $feature_bg_type_options = [
         'none'  => get_string('feature_bg_none', 'local_depan'),
@@ -295,20 +295,20 @@ if ($hassiteconfig) {
         $default_title   = isset($feature_defaults[$n]) ? get_string($feature_defaults[$n]['title'], 'local_depan') : '';
         $default_desc    = isset($feature_defaults[$n]) ? get_string($feature_defaults[$n]['desc'],  'local_depan') : '';
 
-        $settings->add(new admin_setting_heading(
+        $features_settings->add(new admin_setting_heading(
             'local_depan/' . $prefix . '_hdr',
             get_string('feature_n', 'local_depan', $n),
             ''
         ));
 
-        $settings->add(new admin_setting_configcheckbox(
+        $features_settings->add(new admin_setting_configcheckbox(
             'local_depan/' . $prefix . '_enabled',
             get_string('feature_enabled', 'local_depan'),
             get_string('feature_enabled_desc', 'local_depan'),
             $default_enabled
         ));
 
-        $settings->add(new admin_setting_configtext(
+        $features_settings->add(new admin_setting_configtext(
             'local_depan/' . $prefix . '_title',
             get_string('feature_title', 'local_depan'),
             get_string('feature_title_desc', 'local_depan'),
@@ -316,7 +316,7 @@ if ($hassiteconfig) {
             PARAM_TEXT
         ));
 
-        $settings->add(new admin_setting_configtextarea(
+        $features_settings->add(new admin_setting_configtextarea(
             'local_depan/' . $prefix . '_desc',
             get_string('feature_desc', 'local_depan'),
             get_string('feature_desc_desc', 'local_depan'),
@@ -324,7 +324,7 @@ if ($hassiteconfig) {
             PARAM_TEXT
         ));
 
-        $settings->add(new admin_setting_configselect(
+        $features_settings->add(new admin_setting_configselect(
             'local_depan/' . $prefix . '_icon_type',
             get_string('feature_icon_type', 'local_depan'),
             get_string('feature_icon_type_desc', 'local_depan'),
@@ -332,7 +332,7 @@ if ($hassiteconfig) {
             $feature_icon_type_options
         ));
 
-        $settings->add(new admin_setting_configtext(
+        $features_settings->add(new admin_setting_configtext(
             'local_depan/' . $prefix . '_icon',
             get_string('feature_icon_class', 'local_depan'),
             get_string('feature_icon_class_desc', 'local_depan'),
@@ -340,7 +340,7 @@ if ($hassiteconfig) {
             PARAM_TEXT
         ));
 
-        $settings->add(new admin_setting_configstoredfile(
+        $features_settings->add(new admin_setting_configstoredfile(
             'local_depan/' . $prefix . '_icon_image',
             get_string('feature_icon_image_file', 'local_depan'),
             get_string('feature_icon_image_file_desc', 'local_depan'),
@@ -349,7 +349,7 @@ if ($hassiteconfig) {
             ['maxfiles' => 1, 'accepted_types' => ['image']]
         ));
 
-        $settings->add(new admin_setting_configselect(
+        $features_settings->add(new admin_setting_configselect(
             'local_depan/' . $prefix . '_bg_type',
             get_string('feature_bg_type', 'local_depan'),
             get_string('feature_bg_type_desc', 'local_depan'),
@@ -357,14 +357,14 @@ if ($hassiteconfig) {
             $feature_bg_type_options
         ));
 
-        $settings->add(new admin_setting_configcolourpicker(
+        $features_settings->add(new admin_setting_configcolourpicker(
             'local_depan/' . $prefix . '_bg_color',
             get_string('feature_bg_color_picker', 'local_depan'),
             get_string('feature_bg_color_picker_desc', 'local_depan'),
             '#ffffff'
         ));
 
-        $settings->add(new admin_setting_configstoredfile(
+        $features_settings->add(new admin_setting_configstoredfile(
             'local_depan/' . $prefix . '_bg_image',
             get_string('feature_bg_image_file', 'local_depan'),
             get_string('feature_bg_image_file_desc', 'local_depan'),
