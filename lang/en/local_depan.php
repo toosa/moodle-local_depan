@@ -50,6 +50,8 @@ $string['feature_certificate_desc'] = 'Earn recognized certificates upon course 
 // Settings strings
 $string['enable_landing_page'] = 'Enable Landing Page';
 $string['enable_landing_page_desc'] = 'Enable the custom landing page for non-logged in users';
+$string['show_features'] = 'Show Features Section';
+$string['show_features_desc'] = 'Display the Features section on the landing page. Uncheck to hide the entire section.';
 $string['custom_welcome_title'] = 'Custom Welcome Title';
 $string['custom_welcome_title_desc'] = 'Custom title for the hero section';
 $string['custom_welcome_subtitle'] = 'Custom Welcome Subtitle';

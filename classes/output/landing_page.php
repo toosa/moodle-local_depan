@@ -379,6 +379,7 @@ class landing_page implements renderable, templatable {
             }
         }
         $data->features = $features;
+        $data->show_features = (bool)(int)(get_config('local_depan', 'show_features') ?? 1);
         
         // Statistics (if logged in)
         $data->show_stats = $this->is_logged_in;

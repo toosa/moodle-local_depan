@@ -50,6 +50,8 @@ $string['feature_certificate_desc'] = 'Dapatkan sertifikat yang diakui setelah m
 // Settings strings
 $string['enable_landing_page'] = 'Aktifkan Halaman Depan';
 $string['enable_landing_page_desc'] = 'Aktifkan halaman depan kustom untuk pengguna yang belum login';
+$string['show_features'] = 'Tampilkan Bagian Fitur';
+$string['show_features_desc'] = 'Tampilkan bagian Fitur di halaman depan. Hilangkan centang untuk menyembunyikan seluruh bagian.';
 $string['custom_welcome_title'] = 'Judul Selamat Datang Kustom';
 $string['custom_welcome_title_desc'] = 'Judul kustom untuk bagian hero';
 $string['custom_welcome_subtitle'] = 'Subjudul Selamat Datang Kustom';

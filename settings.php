@@ -44,6 +44,14 @@ if ($hassiteconfig) {
         1
     ));
 
+    // Show/hide features section
+    $settings->add(new admin_setting_configcheckbox(
+        'local_depan/show_features',
+        get_string('show_features', 'local_depan'),
+        get_string('show_features_desc', 'local_depan'),
+        1
+    ));
+
     // Custom welcome title
     $settings->add(new admin_setting_configtext(
         'local_depan/welcome_title',
