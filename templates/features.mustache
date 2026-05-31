@@ -5,7 +5,15 @@
 
     Context variables:
     * features_title - Section title
-    * features - Array of feature objects with icon, title, description
+    * features - Array of feature objects:
+        - title       string
+        - description string
+        - has_icon    bool  - render FA icon
+        - icon        string FA class (e.g. fa-star)
+        - has_image   bool  - render <img> as icon
+        - image_url   string
+        - has_bg      bool  - card has a custom background
+        - card_style  string inline CSS for card background
 }}
 
 <div class="features-section">
@@ -13,12 +21,14 @@
         <h2 class="section-title">{{features_title}}</h2>
         <div class="features-grid">
             {{#features}}
-            <div class="feature-card">
+            <div class="feature-card{{#has_bg}} feature-card--custom-bg{{/has_bg}}" {{#card_style}}style="{{{card_style}}}"{{/card_style}}>
+                {{#has_bg}}<div class="feature-card-overlay"></div>{{/has_bg}}
                 <div class="feature-icon">
-                    <i class="fa {{icon}}"></i>
+                    {{#has_icon}}<i class="fa {{icon}}"></i>{{/has_icon}}
+                    {{#has_image}}<img class="feature-icon-img" src="{{image_url}}" alt="{{title}}">{{/has_image}}
                 </div>
                 <h3>{{title}}</h3>
-                <p>{{description}}</p>
+                <p>{{{description}}}</p>
             </div>
             {{/features}}
         </div>

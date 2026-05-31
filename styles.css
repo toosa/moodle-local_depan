@@ -126,6 +126,8 @@
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .feature-card:hover {
@@ -133,10 +135,51 @@
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
+/* Semi-transparent overlay for cards with background images */
+.feature-card--custom-bg .feature-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 15px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure card content sits above the overlay */
+.feature-card--custom-bg .feature-icon,
+.feature-card--custom-bg h3,
+.feature-card--custom-bg p {
+    position: relative;
+    z-index: 1;
+}
+
+/* Text colour override for cards with a dark background/overlay */
+.feature-card--custom-bg h3 {
+    color: #fff;
+}
+
+.feature-card--custom-bg p {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.feature-card--custom-bg .feature-icon {
+    color: #fff;
+}
+
 .feature-icon {
     font-size: 3rem;
     color: #667eea;
     margin-bottom: 1rem;
+}
+
+/* Image used as feature icon */
+.feature-icon-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 1rem;
 }
 
 .feature-card h3 {

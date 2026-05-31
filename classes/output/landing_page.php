@@ -148,6 +148,81 @@ class landing_page implements renderable, templatable {
     }
 
     /**
+     * Get card background style for a feature slot.
+     *
+     * @param int $n  Feature number 1–8
+     * @return string Inline CSS string, empty if no background configured
+     */
+    private function get_feature_background(int $n): string {
+        $prefix   = 'feature_' . $n;
+        $bg_type  = get_config('local_depan', $prefix . '_bg_type') ?: 'none';
+
+        if ($bg_type === 'color') {
+            $color = get_config('local_depan', $prefix . '_bg_color') ?: '#ffffff';
+            return 'background:' . $color . ';';
+        }
+
+        if ($bg_type === 'image') {
+            $context = \context_system::instance();
+            $fs      = get_file_storage();
+            $files   = $fs->get_area_files(
+                $context->id, 'local_depan', $prefix . '_bg_image', 0, 'timemodified', false
+            );
+            if (!empty($files)) {
+                $file     = reset($files);
+                $imageurl = \moodle_url::make_pluginfile_url(
+                    $file->get_contextid(), $file->get_component(),
+                    $file->get_filearea(), $file->get_itemid(),
+                    $file->get_filepath(), $file->get_filename()
+                );
+                return 'background-image:url(' . $imageurl . ');background-size:cover;background-position:center;';
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Get icon data for a feature slot.
+     *
+     * Returns an array with:
+     *   'type'      => 'icon' | 'image'
+     *   'icon'      => FA class string (type=icon)
+     *   'image_url' => URL string      (type=image)
+     *
+     * @param int $n  Feature number 1–8
+     * @return array
+     */
+    private function get_feature_icon(int $n): array {
+        $prefix    = 'feature_' . $n;
+        $icon_type = get_config('local_depan', $prefix . '_icon_type') ?: 'icon';
+
+        if ($icon_type === 'image') {
+            $context = \context_system::instance();
+            $fs      = get_file_storage();
+            $files   = $fs->get_area_files(
+                $context->id, 'local_depan', $prefix . '_icon_image', 0, 'timemodified', false
+            );
+            if (!empty($files)) {
+                $file     = reset($files);
+                $imageurl = \moodle_url::make_pluginfile_url(
+                    $file->get_contextid(), $file->get_component(),
+                    $file->get_filearea(), $file->get_itemid(),
+                    $file->get_filepath(), $file->get_filename()
+                );
+                return ['type' => 'image', 'icon' => '', 'image_url' => $imageurl->out(false)];
+            }
+        }
+
+        // Fallback to FA icon.
+        $icon = trim((string)(get_config('local_depan', $prefix . '_icon') ?? ''));
+        if ($icon === '') {
+            $icon = 'fa-star';
+        }
+        return ['type' => 'icon', 'icon' => $icon, 'image_url' => ''];
+    }
+
+    /**
      * Get hero background style based on settings
      */
     private function get_hero_background() {
@@ -249,30 +324,56 @@ class landing_page implements renderable, templatable {
         $data->str_explore_courses = get_string('explore_courses', 'local_depan');
         $data->str_view_all_courses = get_string('view_all_courses', 'local_depan');
         
-        // Features
+        // Features — load dynamically from config (max 8).
         $data->features_title = get_string('features_title', 'local_depan');
-        $data->features = [
-            [
-                'icon' => 'fa-play-circle',
-                'title' => get_string('feature_interactive', 'local_depan'),
-                'description' => get_string('feature_interactive_desc', 'local_depan')
-            ],
-            [
-                'icon' => 'fa-graduation-cap',
-                'title' => get_string('feature_expert', 'local_depan'),
-                'description' => get_string('feature_expert_desc', 'local_depan')
-            ],
-            [
-                'icon' => 'fa-clock-o',
-                'title' => get_string('feature_flexible', 'local_depan'),
-                'description' => get_string('feature_flexible_desc', 'local_depan')
-            ],
-            [
-                'icon' => 'fa-certificate',
-                'title' => get_string('feature_certificate', 'local_depan'),
-                'description' => get_string('feature_certificate_desc', 'local_depan')
-            ]
-        ];
+        $features = [];
+        for ($n = 1; $n <= 8; $n++) {
+            $prefix  = 'feature_' . $n;
+            $enabled = get_config('local_depan', $prefix . '_enabled');
+            if (empty($enabled)) {
+                continue;
+            }
+            $title = trim((string)(get_config('local_depan', $prefix . '_title') ?? ''));
+            $desc  = trim((string)(get_config('local_depan', $prefix . '_desc')  ?? ''));
+            if ($title === '') {
+                continue;
+            }
+            $icon_data  = $this->get_feature_icon($n);
+            $card_style = $this->get_feature_background($n);
+            $features[] = [
+                'icon'        => $icon_data['icon'],
+                'has_icon'    => ($icon_data['type'] === 'icon'),
+                'has_image'   => ($icon_data['type'] === 'image'),
+                'image_url'   => $icon_data['image_url'],
+                'title'       => format_string($title),
+                'description' => format_text($desc, FORMAT_PLAIN),
+                'card_style'  => $card_style,
+                'has_bg'      => ($card_style !== ''),
+            ];
+        }
+
+        // Fallback to 4 hardcoded defaults if no features are configured.
+        if (empty($features)) {
+            $defaults = [
+                ['fa-play-circle',   'feature_interactive', 'feature_interactive_desc'],
+                ['fa-graduation-cap','feature_expert',      'feature_expert_desc'],
+                ['fa-clock-o',       'feature_flexible',    'feature_flexible_desc'],
+                ['fa-certificate',   'feature_certificate', 'feature_certificate_desc'],
+            ];
+            foreach ($defaults as $d) {
+                $features[] = [
+                    'icon'        => $d[0],
+                    'has_icon'    => true,
+                    'has_image'   => false,
+                    'image_url'   => '',
+                    'title'       => get_string($d[1], 'local_depan'),
+                    'description' => get_string($d[2], 'local_depan'),
+                    'card_style'  => '',
+                    'has_bg'      => false,
+                ];
+            }
+        }
+        $data->features = $features;
         
         // Statistics (if logged in)
         $data->show_stats = $this->is_logged_in;

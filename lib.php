@@ -41,7 +41,14 @@ function local_depan_pluginfile($course, $cm, $context, $filearea, $args, $force
         return false;
     }
 
-    if ($filearea !== 'hero_bg_image') {
+    // Build list of allowed file areas.
+    $allowed_areas = ['hero_bg_image'];
+    for ($n = 1; $n <= 8; $n++) {
+        $allowed_areas[] = 'feature_' . $n . '_icon_image';
+        $allowed_areas[] = 'feature_' . $n . '_bg_image';
+    }
+
+    if (!in_array($filearea, $allowed_areas)) {
         return false;
     }
 
@@ -64,9 +71,12 @@ function local_depan_pluginfile($course, $cm, $context, $filearea, $args, $force
  * @return array
  */
 function local_depan_get_file_areas() {
-    return array(
-        'hero_bg_image' => get_string('hero_bg_image_file', 'local_depan')
-    );
+    $areas = ['hero_bg_image' => get_string('hero_bg_image_file', 'local_depan')];
+    for ($n = 1; $n <= 8; $n++) {
+        $areas['feature_' . $n . '_icon_image'] = get_string('feature_icon_image_file', 'local_depan');
+        $areas['feature_' . $n . '_bg_image']   = get_string('feature_bg_image_file', 'local_depan');
+    }
+    return $areas;
 }
 
 /**
