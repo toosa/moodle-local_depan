@@ -135,6 +135,24 @@
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
+/* Clickable feature card (rendered as <a> tag) */
+.feature-card--link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.feature-card--link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.feature-card--link:hover h3,
+.feature-card--link:hover p {
+    text-decoration: none;
+}
+
 /* Semi-transparent overlay for cards with background images */
 .feature-card--custom-bg .feature-card-overlay {
     position: absolute;

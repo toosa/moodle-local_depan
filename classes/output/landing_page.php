@@ -340,6 +340,7 @@ class landing_page implements renderable, templatable {
             }
             $icon_data  = $this->get_feature_icon($n);
             $card_style = $this->get_feature_background($n);
+            $url        = trim((string)(get_config('local_depan', $prefix . '_url') ?? ''));
             $features[] = [
                 'icon'        => $icon_data['icon'],
                 'has_icon'    => ($icon_data['type'] === 'icon'),
@@ -349,6 +350,8 @@ class landing_page implements renderable, templatable {
                 'description' => format_text($desc, FORMAT_PLAIN),
                 'card_style'  => $card_style,
                 'has_bg'      => ($card_style !== ''),
+                'url'         => $url,
+                'has_url'     => ($url !== ''),
             ];
         }
 
@@ -370,6 +373,8 @@ class landing_page implements renderable, templatable {
                     'description' => get_string($d[2], 'local_depan'),
                     'card_style'  => '',
                     'has_bg'      => false,
+                    'url'         => '',
+                    'has_url'     => false,
                 ];
             }
         }

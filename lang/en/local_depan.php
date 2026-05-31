@@ -26,6 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Landing Page';
+$string['general_settings'] = 'General Settings';
 $string['welcome_title'] = 'Welcome to Our Learning Platform';
 $string['welcome_subtitle'] = 'Discover, Learn, and Grow with Us';
 $string['get_started'] = 'Get Started';
@@ -114,6 +115,8 @@ $string['feature_title']                = 'Title';
 $string['feature_title_desc']           = 'Title shown on the feature card';
 $string['feature_desc']                 = 'Description';
 $string['feature_desc_desc']            = 'Short description shown on the feature card';
+$string['feature_url']                  = 'Link URL';
+$string['feature_url_desc']             = 'Optional URL. When set, the entire card becomes a clickable link. Leave empty for no link.';
 $string['feature_icon_type']            = 'Icon type';
 $string['feature_icon_type_desc']       = 'Choose whether to use a Font Awesome icon class or upload a custom image';
 $string['feature_icon_type_icon']       = 'Font Awesome icon';

@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component    = 'local_depan';
-$plugin->release      = '1.0';
-$plugin->version      = 2025122000;
+$plugin->release      = '1.2.0';
+$plugin->version      = 2026053100;
 $plugin->requires     = 2022112800;
 $plugin->supported    = [401, 405];
 $plugin->maturity     = MATURITY_STABLE;

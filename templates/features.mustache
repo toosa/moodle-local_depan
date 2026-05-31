@@ -14,6 +14,8 @@
         - image_url   string
         - has_bg      bool  - card has a custom background
         - card_style  string inline CSS for card background
+        - has_url     bool  - card is clickable
+        - url         string destination URL
 }}
 
 <div class="features-section">
@@ -21,7 +23,12 @@
         <h2 class="section-title">{{features_title}}</h2>
         <div class="features-grid">
             {{#features}}
+            {{#has_url}}
+            <a href="{{url}}" class="feature-card feature-card--link{{#has_bg}} feature-card--custom-bg{{/has_bg}}" {{#card_style}}style="{{{card_style}}}"{{/card_style}}>
+            {{/has_url}}
+            {{^has_url}}
             <div class="feature-card{{#has_bg}} feature-card--custom-bg{{/has_bg}}" {{#card_style}}style="{{{card_style}}}"{{/card_style}}>
+            {{/has_url}}
                 {{#has_bg}}<div class="feature-card-overlay"></div>{{/has_bg}}
                 <div class="feature-icon">
                     {{#has_icon}}<i class="fa {{icon}}"></i>{{/has_icon}}
@@ -29,7 +36,8 @@
                 </div>
                 <h3>{{title}}</h3>
                 <p>{{{description}}}</p>
-            </div>
+            {{#has_url}}</a>{{/has_url}}
+            {{^has_url}}</div>{{/has_url}}
             {{/features}}
         </div>
     </div>

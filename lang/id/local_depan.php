@@ -26,6 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Halaman Depan';
+$string['general_settings'] = 'Pengaturan Umum';
 $string['welcome_title'] = 'Selamat Datang di Platform Pembelajaran Kami';
 $string['welcome_subtitle'] = 'Temukan, Pelajari, dan Berkembang Bersama Kami';
 $string['get_started'] = 'Mulai Belajar';
@@ -83,6 +84,8 @@ $string['feature_title']                = 'Judul';
 $string['feature_title_desc']           = 'Judul yang ditampilkan pada kartu fitur';
 $string['feature_desc']                 = 'Deskripsi';
 $string['feature_desc_desc']            = 'Deskripsi singkat yang ditampilkan pada kartu fitur';
+$string['feature_url']                  = 'URL Tautan';
+$string['feature_url_desc']             = 'URL opsional. Jika diisi, seluruh kartu menjadi tautan yang dapat diklik. Kosongkan jika tidak ada tautan.';
 $string['feature_icon_type']            = 'Jenis ikon';
 $string['feature_icon_type_desc']       = 'Pilih apakah menggunakan kelas Font Awesome atau mengunggah gambar kustom';
 $string['feature_icon_type_icon']       = 'Ikon Font Awesome';

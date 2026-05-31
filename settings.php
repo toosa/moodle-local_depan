@@ -25,8 +25,16 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
-    $settings = new admin_settingpage('local_depan', get_string('pluginname', 'local_depan'));
-    $ADMIN->add('localplugins', $settings);
+    // Create a category so sub-pages appear under "Landing Page" in the menu.
+    $ADMIN->add('localplugins', new admin_category(
+        'local_depan_cat',
+        get_string('pluginname', 'local_depan')
+    ));
+
+    // General settings sub-page (named 'local_depan' for back-compat with
+    // admin notifications that link directly to this section).
+    $settings = new admin_settingpage('local_depan', get_string('general_settings', 'local_depan'));
+    $ADMIN->add('local_depan_cat', $settings);
 
     // Enable/Disable landing page redirect
     $settings->add(new admin_setting_configcheckbox(
@@ -263,12 +271,12 @@ if ($hassiteconfig) {
         '', PARAM_TEXT
     ));
 
-    // ── Features Settings (separate sub-page) ─────────────────────────────────
+    // ── Features Settings (sub-page under Landing Page category) ──────────────
     $features_settings = new admin_settingpage(
         'local_depan_features',
         get_string('features_settings', 'local_depan')
     );
-    $ADMIN->add('localplugins', $features_settings);
+    $ADMIN->add('local_depan_cat', $features_settings);
 
     $feature_bg_type_options = [
         'none'  => get_string('feature_bg_none', 'local_depan'),
@@ -322,6 +330,14 @@ if ($hassiteconfig) {
             get_string('feature_desc_desc', 'local_depan'),
             $default_desc,
             PARAM_TEXT
+        ));
+
+        $features_settings->add(new admin_setting_configtext(
+            'local_depan/' . $prefix . '_url',
+            get_string('feature_url', 'local_depan'),
+            get_string('feature_url_desc', 'local_depan'),
+            '',
+            PARAM_URL
         ));
 
         $features_settings->add(new admin_setting_configselect(
