@@ -286,6 +286,56 @@ if ($hassiteconfig) {
     );
     $ADMIN->add('local_depan_cat', $features_settings);
 
+    // ── Features section title & styling ─────────────────────────────────────
+    $features_settings->add(new admin_setting_heading(
+        'local_depan/features_title_styling_hdr',
+        get_string('features_title_styling', 'local_depan'),
+        ''
+    ));
+    $features_settings->add(new admin_setting_configtext(
+        'local_depan/features_section_title',
+        get_string('features_section_title', 'local_depan'),
+        get_string('features_section_title_desc', 'local_depan'),
+        get_string('features_title', 'local_depan'),
+        PARAM_TEXT
+    ));
+    $features_settings->add(new admin_setting_configtext(
+        'local_depan/features_title_font_size',
+        get_string('font_size', 'local_depan'),
+        get_string('font_size_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
+    $features_settings->add(new admin_setting_configselect(
+        'local_depan/features_title_font_family',
+        get_string('font_family', 'local_depan'),
+        get_string('font_family_desc', 'local_depan'),
+        '', $fontoptions
+    ));
+    $features_settings->add(new admin_setting_configselect(
+        'local_depan/features_title_font_weight',
+        get_string('font_weight', 'local_depan'),
+        get_string('font_weight_desc', 'local_depan'),
+        '', $weightoptions
+    ));
+    $features_settings->add(new admin_setting_configcolourpicker(
+        'local_depan/features_title_font_color',
+        get_string('font_color', 'local_depan'),
+        get_string('font_color_desc', 'local_depan'),
+        ''
+    ));
+    $features_settings->add(new admin_setting_configselect(
+        'local_depan/features_title_text_align',
+        get_string('text_align', 'local_depan'),
+        get_string('text_align_desc', 'local_depan'),
+        '', $alignoptions
+    ));
+    $features_settings->add(new admin_setting_configtext(
+        'local_depan/features_title_line_height',
+        get_string('line_height', 'local_depan'),
+        get_string('line_height_desc', 'local_depan'),
+        '', PARAM_TEXT
+    ));
+
     $feature_bg_type_options = [
         'none'  => get_string('feature_bg_none', 'local_depan'),
         'color' => get_string('feature_bg_color', 'local_depan'),

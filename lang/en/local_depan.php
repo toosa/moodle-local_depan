@@ -136,3 +136,8 @@ $string['feature_bg_color_picker']      = 'Background colour';
 $string['feature_bg_color_picker_desc'] = 'Pick a solid background colour for this card';
 $string['feature_bg_image_file']        = 'Background image';
 $string['feature_bg_image_file_desc']   = 'Upload a background image for this card. A dark overlay will be applied automatically to keep the text readable.';
+
+// Features section title & styling
+$string['features_title_styling']       = 'Features Section Title & Styling';
+$string['features_section_title']       = 'Section title';
+$string['features_section_title_desc']  = 'Heading text displayed above the feature cards. Defaults to <em>Our Features</em>.';

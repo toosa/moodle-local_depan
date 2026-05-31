@@ -104,4 +104,10 @@ $string['feature_bg_image']             = 'Gambar latar belakang';
 $string['feature_bg_color_picker']      = 'Warna latar belakang';
 $string['feature_bg_color_picker_desc'] = 'Pilih warna latar belakang solid untuk kartu ini';
 $string['feature_bg_image_file']        = 'Gambar latar belakang';
+$string['feature_bg_image_file_desc']   = 'Upload gambar latar belakang untuk kartu ini. Lapisan gelap akan diterapkan secara otomatis agar teks tetap terbaca.';
+
+// Judul & gaya bagian Features
+$string['features_title_styling']       = 'Judul & Gaya Bagian Fitur';
+$string['features_section_title']       = 'Judul seksi';
+$string['features_section_title_desc']  = 'Teks judul yang ditampilkan di atas kartu fitur. Default: <em>Fitur Kami</em>.';
 $string['feature_bg_image_file_desc']   = 'Upload gambar latar belakang untuk kartu ini. Overlay gelap akan diterapkan otomatis agar teks tetap terbaca.';

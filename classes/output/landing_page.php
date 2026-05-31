@@ -325,7 +325,9 @@ class landing_page implements renderable, templatable {
         $data->str_view_all_courses = get_string('view_all_courses', 'local_depan');
         
         // Features — load dynamically from config (max 8).
-        $data->features_title = get_string('features_title', 'local_depan');
+        $custom_ftitle = trim((string)(get_config('local_depan', 'features_section_title') ?? ''));
+        $data->features_title = $custom_ftitle !== '' ? $custom_ftitle : get_string('features_title', 'local_depan');
+        $data->features_title_style = $this->get_text_style('features_title');
         $features = [];
         for ($n = 1; $n <= 8; $n++) {
             $prefix  = 'feature_' . $n;
